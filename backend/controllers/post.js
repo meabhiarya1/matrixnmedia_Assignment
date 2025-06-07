@@ -1,8 +1,6 @@
-// controllers/post.js
 
 const Post = require("../models/Post");
 
-// Create a new post
 exports.createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
@@ -19,7 +17,6 @@ exports.createPost = async (req, res) => {
   }
 };
 
-// Get all posts by the logged-in user
 exports.getMyPosts = async (req, res) => {
   try {
     const posts = await Post.find({ author: req.user.id })
@@ -33,7 +30,21 @@ exports.getMyPosts = async (req, res) => {
   }
 };
 
-// Get a single post by ID
+exports.getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({ isPublic: true })
+      .populate("author", "name email")
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({
+      message: "Failed to fetch public posts",
+      error: err.message,
+    });
+  }
+};
+
 exports.getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).populate(
@@ -49,7 +60,6 @@ exports.getPost = async (req, res) => {
   }
 };
 
-// Update a post
 exports.updatePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -69,7 +79,6 @@ exports.updatePost = async (req, res) => {
   }
 };
 
-// Delete a post
 exports.deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -87,7 +96,6 @@ exports.deletePost = async (req, res) => {
   }
 };
 
-// Add a comment to a post
 exports.addComment = async (req, res) => {
   try {
     const { name, content } = req.body;

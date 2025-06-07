@@ -1,4 +1,3 @@
-// models/Post.js
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
@@ -10,10 +9,11 @@ const postSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    comments: [commentSchema],
+    isPublic: { type: Boolean, default: true }, 
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, 
+    comments: [commentSchema], 
   },
-  { timestamps: true }
+  { timestamps: true } 
 );
 
 module.exports = mongoose.model("Post", postSchema);
