@@ -97,6 +97,7 @@ const postsSlice = createSlice({
     selectedPost: null,
     loading: false,
     error: null,
+    token: localStorage.getItem("token") || null,
   },
   reducers: {
     clearSelectedPost(state) {

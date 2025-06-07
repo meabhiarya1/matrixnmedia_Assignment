@@ -31,7 +31,6 @@ export const loginUser = createAsyncThunk(
       if (!response.data.token) {
         throw new Error("Login failed, no token received");
       }
-      console.log(response.data);
       // Store the token in localStorage
       localStorage.setItem(tokenKey, response?.data?.token);
       return response.data;
