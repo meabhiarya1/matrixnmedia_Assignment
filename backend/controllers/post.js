@@ -33,7 +33,6 @@ exports.getMyPosts = async (req, res) => {
   }
 };
 
-
 // Get a single post by ID
 exports.getPost = async (req, res) => {
   try {
@@ -79,7 +78,7 @@ exports.deletePost = async (req, res) => {
     if (post.author.toString() !== req.user.id)
       return res.status(403).json({ message: "Unauthorized" });
 
-    await post.remove();
+    await post.deleteOne();
     res.json({ message: "Post deleted" });
   } catch (err) {
     res
