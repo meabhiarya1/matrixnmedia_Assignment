@@ -8,6 +8,7 @@ module.exports = function (req, res, next) {
     req.user = decoded;
     next();
   } catch {
-    res.sendStatus(403);
+    res.status(401).json({ message: "Unauthorized" });
+    return;
   }
 };
