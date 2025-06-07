@@ -1,9 +1,19 @@
-
 const Post = require("../models/Post");
 
 exports.createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
+
+    if (!title || !content) {
+      return res
+        .status(400)
+        .json({ message: "Title and content are required" });
+    }
+    // Check if the user is authenticated
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    // Create a new post
     const newPost = await Post.create({
       title,
       content,
