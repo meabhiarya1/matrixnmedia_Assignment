@@ -19,6 +19,7 @@ export default function PostCard({ post }) {
 
   return (
     <div className="border p-4 rounded shadow mb-4">
+      {console.log(post)}
       <h3 className="font-semibold text-xl">{post.title}</h3>
       <p className="text-gray-600">By: {post.author?.name || "Unknown"}</p>
       <div className="mt-2 flex gap-2">

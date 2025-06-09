@@ -72,10 +72,13 @@ exports.getPost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate(
+      "author",
+      "name email"
+    );
     if (!post) return res.status(404).json({ message: "Post not found" });
 
-    if (post.author.toString() !== req.user.id)
+    if (post.author._id.toString() !== req.user.id)
       return res.status(403).json({ message: "Unauthorized" });
 
     if (!req.body.postData.title || !req.body.postData.content) {
