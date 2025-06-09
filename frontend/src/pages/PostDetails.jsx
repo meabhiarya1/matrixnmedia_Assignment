@@ -14,8 +14,8 @@ export default function PostDetails() {
     }
   }, [post, dispatch]);
 
-  if (loading) return <div className="p-4">Loading...</div>;
-  if (!post) return <div className="p-4">Post not found.</div>;
+  if (loading) return <div className="p-4 text-center ">Loading...</div>;
+  if (!post) return <div className="p-4 text-center flex justify-center items-center">Post not found.</div>;
 
   return (
     <div className="p-4">
