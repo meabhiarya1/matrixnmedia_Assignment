@@ -10,10 +10,11 @@ export default function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await dispatch(registerUser({ email, password }));
+    const result = await dispatch(registerUser({ email, name, password }));
     if (result.meta.requestStatus === "fulfilled") {
       navigate("/dashboard");
     }
@@ -35,6 +36,15 @@ export default function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <input
+          type="name"
+          required
+          className="border p-2 w-full mb-3"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
         <input
           type="password"
           required

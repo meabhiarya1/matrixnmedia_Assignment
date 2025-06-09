@@ -9,17 +9,23 @@ exports.createPost = async (req, res) => {
         .status(400)
         .json({ message: "Title and content are required" });
     }
-    // Check if the user is authenticated
+
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-    // Create a new post
+
     const newPost = await Post.create({
       title,
       content,
       author: req.user.id,
     });
-    res.status(201).json(newPost);
+
+    const populatedPost = await Post.findById(newPost._id).populate(
+      "author",
+      "name email"
+    );
+
+    res.status(201).json(populatedPost);
   } catch (err) {
     res
       .status(500)
@@ -103,7 +109,7 @@ exports.deletePost = async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ message: "Post not found" });
 
-    if (post.author.toString() !== req.user.id)
+    if (post.author._id.toString() !== req.user.id)
       return res.status(403).json({ message: "Unauthorized" });
 
     await post.deleteOne();
