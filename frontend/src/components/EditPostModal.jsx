@@ -15,7 +15,7 @@ export default function EditPostModal({ post, onClose, onSave }) {
   }, [post]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black bg-opacity-10 flex justify-center items-center z-50">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded shadow max-w-md w-full"

@@ -60,7 +60,7 @@ export default function Home() {
                   to="/dashboard"
                   class="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
                 >
-                  Blog
+                  My Blogs
                 </Link>
               </li>
               <li class="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
