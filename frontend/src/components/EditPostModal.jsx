@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-export default function EditPostModal({ post, onClose, onUpdate }) {
+export default function EditPostModal({ post, onClose, onSave }) {
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate({ title, content });
+    onSave({ title, content });
   };
 
   useEffect(() => {

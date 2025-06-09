@@ -40,15 +40,12 @@ export const fetchPostById = createAsyncThunk(
 export const createPost = createAsyncThunk(
   "posts/createPost",
   async (postData) => {
-    const response = await axios.post(
-      "/posts",
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    const response = await axios.post("/posts", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      postData
-    );
+      postData,
+    });
     return response.data;
   }
 );
@@ -57,15 +54,12 @@ export const createPost = createAsyncThunk(
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
   async ({ id, postData }) => {
-    const response = await axios.put(
-      `/posts/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    const response = await axios.put(`/posts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      postData
-    );
+      postData,
+    });
     return response.data;
   }
 );

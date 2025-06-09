@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-export default function CreatePostModal({ onClose, onCreate }) {
+export default function CreatePostModal({ onClose, onSave }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate({ title, content });
+    onSave({ title, content });
+    onClose();
   };
 
   return (
@@ -33,8 +34,12 @@ export default function CreatePostModal({ onClose, onCreate }) {
         <div className="flex justify-end gap-2">
           <button
             type="button"
-            onClick={onClose}
             className="px-4 py-2 border rounded"
+            onClick={() => {
+              setTitle("");
+              setContent("");
+              onClose();
+            }}
           >
             Cancel
           </button>

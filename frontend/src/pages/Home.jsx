@@ -10,8 +10,6 @@ export default function Home() {
     (state) => state.posts
   );
 
-  console.log(token);
-
   useEffect(() => {
     dispatch(fetchPublicPosts());
   }, [dispatch]);

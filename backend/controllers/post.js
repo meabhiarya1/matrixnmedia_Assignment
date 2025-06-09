@@ -2,7 +2,7 @@ const Post = require("../models/Post");
 
 exports.createPost = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content } = req.body.postData;
 
     if (!title || !content) {
       return res
@@ -78,8 +78,14 @@ exports.updatePost = async (req, res) => {
     if (post.author.toString() !== req.user.id)
       return res.status(403).json({ message: "Unauthorized" });
 
-    post.title = req.body.title || post.title;
-    post.content = req.body.content || post.content;
+    if (!req.body.postData.title || !req.body.postData.content) {
+      return res
+        .status(400)
+        .json({ message: "Title and content are required for update" });
+    }
+
+    post.title = req.body.postData.title || post.title;
+    post.content = req.body.postData.content || post.content;
     const updated = await post.save();
     res.json(updated);
   } catch (err) {
